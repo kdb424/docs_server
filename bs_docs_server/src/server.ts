@@ -12,27 +12,27 @@ import HttpStatusCodes from '@src/configurations/HttpStatusCodes';
 import { NodeEnvs } from '@src/declarations/enums';
 import { RouteError } from '@src/declarations/classes';
 import sequelize from './configurations/sqlite';
-import fileService from "./services/file-service"
-import cors from 'cors'
+import fileService from "./services/file-service";
+import cors from 'cors';
 const connect = async () => {
   try {
     await sequelize.authenticate();
-    await sequelize.drop()
+    await sequelize.drop();
     await sequelize.sync();
-    fileService.crawlAndCreate()
+    fileService.crawlAndCreate();
     console.log('Connection has been established successfully.');
   } catch (error) {
     console.error('Unable to connect to the database:', error);
   }
-}
-connect()
+};
+connect();
 // **** Init express **** //
 
 const app = express();
 
 
 // **** Set basic express settings **** //
-app.use(cors())
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
